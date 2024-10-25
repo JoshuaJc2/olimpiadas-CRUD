@@ -30,7 +30,7 @@ export class ArbitroComponent {
         segundo_apellido: [""],
         pais_origen: ["", [Validators.required]],
         nacimiento: ["", [Validators.required]]
-      })
+      });
   }
 
   getArbitros(){
@@ -58,10 +58,10 @@ export class ArbitroComponent {
     this.submitted = false;
     let id = this.arbitros.length + 1;
     let nuevaCat = new Arbitro(id, this.form.controls['nombre'].value!, this.form.controls['primer_apellido'].value!, 
-      this.form.controls['segudo_apellido'].value!, this.form.controls['pais_origen'].value!, this.form.controls['nacimiento'].value!);
+      this.form.controls['segundo_apellido'].value!, this.form.controls['pais_origen'].value!, this.form.controls['nacimiento'].value!);
     this.arbitros.push(nuevaCat);
     this.hideModalForm();
     //alert("La categoria ha sido registrada");
-    this.swal.successMessage("La categoria ha sido registrada"); // show message
+    this.swal.successMessage("El arbitro ha sido registrado"); // show message
   }
 }
