@@ -23,6 +23,19 @@
   padding-top: 12px;
 }
 
+.color-red{
+  color: red;
+}
+
+.input-error-message{
+  color: red;
+  margin:4px;
+}
+
+.table-empty{
+  padding: 24px;
+}
+
 /*Buttons*/
 .btn-new{
   float:right;
@@ -35,6 +48,29 @@
 
 .btn-save{
   width: 240px;
+}
+
+/* swal messages  */
+
+.swal-title{
+  font-size: 24px;
+}
+
+
+.swal-icon{
+  font-size: 12px;
+}
+
+
+.swal-cancel-button{
+  width: 120px;
+  margin: 12px;
+}
+
+
+.swal-confirm-button{
+  width: 120px;
+  margin: 12px;
 }
 
 :root,

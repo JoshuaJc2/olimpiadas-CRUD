@@ -4,9 +4,9 @@ export class Entrenador{
     primer_apellido : String = "";
     segundo_apellido : String = "";
     pais_origen : String = "";
-    nacimiento : Date = new Date();   
+    nacimiento : String = "";   
 
-    constructor(idEntrenador : number, nombre : String, primer_apellido : String, segundo_apellido : String, pais_origen : String, nacimiento : Date){
+    constructor(idEntrenador : number, nombre : String, primer_apellido : String, segundo_apellido : String, pais_origen : String, nacimiento : String){
         this.idEntrenador = idEntrenador;
         this.nombre = nombre;
         this.primer_apellido = primer_apellido;

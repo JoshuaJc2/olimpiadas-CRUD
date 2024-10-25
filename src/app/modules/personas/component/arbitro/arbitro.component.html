@@ -14,6 +14,11 @@
           </div>
         </div>
         <div class="card-body">
+          @if(arbitros.length == 0){
+            <div class="text-center table-empty">
+                <h4>No cuentas con categorias registradas</h4>
+            </div>
+          }@else {
           <table class="table table-striped">
             <thead>
               <tr class="table-dark">
@@ -23,6 +28,7 @@
                 <th scope="col">segundo_apellido</th>
                 <th scope="col">pais_origen</th>
                 <th scope="col">nacimiento</th>
+                <th scope="col">otros</th>
               </tr>
             </thead>
             <tbody>
@@ -34,10 +40,29 @@
                       <td>{{ arbitro.segundo_apellido}}</td>
                       <td>{{ arbitro.pais_origen }}</td>
                       <td>{{ arbitro.nacimiento }}</td>
+                      <td>
+                        <div class="dropdown">
+                          <!-- dots button  -->
+                          <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                          </button>
+      
+                          <!-- menu options -->
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item"> <!--(click)="updateCategory(category)">-->
+                              <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                            </a>
+                            <a class="dropdown-item enable-item"> <!--(click)="enableCategory(category.category_id)">-->
+                              <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
+                            </a>
+                          </div>
+                        </div>
+                      </td>
                       </tr>
                     }
             </tbody>
           </table>
+        }
         </div>
 
         <div class="modal fade modal-lg" id="modalForm" tabindex="-1" role="dialog" data-bs-backdrop="static">

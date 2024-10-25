@@ -34,7 +34,7 @@ export class EntrenadorComponent {
   }
 
   getEntrenadores(){
-    this.entrenadorService.getEntrenadores();
+    this.entrenadores = this.entrenadorService.getEntrenadores();
   }
 
   ngOnInit(){
@@ -62,6 +62,6 @@ export class EntrenadorComponent {
     this.entrenadores.push(nuevaCat);
     this.hideModalForm();
     //alert("La categoria ha sido registrada");
-    this.swal.successMessage("El arbitro ha sido registrado"); // show message
+    this.swal.successMessage("El entrenador ha sido registrado"); // show message
   }
 }
