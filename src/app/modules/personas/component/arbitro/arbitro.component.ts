@@ -4,13 +4,14 @@ import { ArbitroService } from '../../_service/arbitro.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../../shared/shares-module';
 import { SwalMessages } from '../../../../shared/swal-messages';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 declare var $: any;
 
 @Component({
   selector: 'app-arbitro',
   standalone: true,
-  imports: [SharedModule],
+  imports: [SharedModule, NgxPaginationModule],
   templateUrl: './arbitro.component.html',
   styleUrl: './arbitro.component.css'
 })
@@ -19,7 +20,12 @@ export class ArbitroComponent {
   arbitros : Arbitro[] = []; 
   form : FormGroup;
   swal : SwalMessages = new SwalMessages();
+  idArbitro : number = 0;
   submitted = false;
+  loading = false;
+  p : number = 1;
+  itemsPerPage = 10;
+  totalArbitros : any;
 
   constructor (
     private formBuilder : FormBuilder,
@@ -34,8 +40,19 @@ export class ArbitroComponent {
   }
 
   getArbitros(){
-    this.arbitros = this.arbitroService.getArbitros();
-  }
+    this.loading = true;
+    this.arbitroService.getArbitros().subscribe({
+      next: (v) => {
+        console.log(v);
+        this.arbitros= v;
+        this.totalArbitros = v.length;
+        this.loading = false;
+      },
+      error: (e) => {
+        console.error(e);
+        this.loading = false;
+      }
+    });  }
 
   ngOnInit(){
     this.getArbitros();
@@ -63,5 +80,11 @@ export class ArbitroComponent {
     this.hideModalForm();
     //alert("La categoria ha sido registrada");
     this.swal.successMessage("El arbitro ha sido registrado"); // show message
+  }
+
+  resetVariables(){
+    this.form.reset();
+    this.submitted = false;
+    this.idArbitro = 0;
   }
 }

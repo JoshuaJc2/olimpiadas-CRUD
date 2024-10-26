@@ -1,4 +1,17 @@
+<style>
 
+.my-pagination ::ng-deep{ 
+  .ngx-pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .ngx-pagination .current{
+    background: #772953;
+  }
+}
+</style>
 <div class="body-content">
     <div class="card">
       <div class="card-header">
@@ -25,44 +38,44 @@
             <tr class="table-dark">
               <th scope="col">identrenador</th>
               <th scope="col">nombre</th>
-              <th scope="col">primer_apellido</th>
-              <th scope="col">segundo_apellido</th>
+              <th scope="col">primerApellido</th>
+              <th scope="col">segundoApellido</th>
               <th scope="col">pais_origen</th>
               <th scope="col">nacimiento</th>
               <th scope="col">otros</th>
             </tr>
           </thead>
           <tbody>
-                   @for(entrenador of entrenadores; track entrenador.idEntrenador; let i = $index ) {
-                    <tr>
-                    <td>{{ entrenador.idEntrenador }}</td>
-                    <td>{{ entrenador.nombre }}</td>
-                    <td>{{ entrenador.primer_apellido }}</td>
-                    <td>{{ entrenador.segundo_apellido}}</td>
-                    <td>{{ entrenador.pais_origen }}</td>
-                    <td>{{ entrenador.nacimiento }}</td>
-                    <td>
-                      <div class="dropdown">
-                        <!-- dots button  -->
-                        <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                          <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
-                        </button>
-    
-                        <!-- menu options -->
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                          <a class="dropdown-item"> <!--(click)="updateCategory(category)">-->
-                            <i class="ph ph-note-pencil icon-text-ul"></i>Editar
-                          </a>
-                          <a class="dropdown-item enable-item"> <!--(click)="enableCategory(category.category_id)">-->
-                            <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
-                          </a>
-                        </div>
-                      </div>
-                    </td>
-                    </tr>
-                  }
+            <!--@for(entrenador of entrenadores; track entrenador.id; let i = $index ) {-->
+            <tr class="max-w-[500px] mx-auto" *ngFor="let entrenador of entrenadores | paginate: {itemsPerPage: itemsPerPage, currentPage: p}">
+              <td>{{ entrenador.id }}</td>
+              <td>{{ entrenador.nombre }}</td>
+              <td>{{ entrenador.primerApellido }}</td>
+              <td>{{ entrenador.segundoApellido}}</td>
+              <td>{{ entrenador.paisOrigen }}</td>
+              <td>{{ entrenador.nacimiento }}</td>
+              <td>
+                <div class="dropdown">
+                  <!-- dots button  -->
+                  <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                  </button>
+                  <!-- menu options -->
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item"> <!--(click)="updateCategory(category)">-->
+                      <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                    </a>
+                    <a class="dropdown-item enable-item"> <!--(click)="enableCategory(category.category_id)">-->
+                      <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
+                    </a>
+                  </div>
+                </div>
+              </td>
+            </tr>
+                  <!--}-->
           </tbody>
         </table>
+        <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
       }
       </div>
 

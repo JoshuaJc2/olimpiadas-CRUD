@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { api_olimpiadas } from '../../../shared/api-olimpiadas';
 import { Entrenador } from '../_model/entrenador';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntrenadorService {
+  private source = '/olimpiadas';
 
-  constructor() { }
+  constructor(
+    private http : HttpClient
+  ) { }
 
-  getEntrenadores() : Entrenador[] {
-    let entrenadores : Entrenador[] = [];
-    // dummy 
-    entrenadores.push(new Entrenador(4,"Miguel", "Miranda", "", "Italia", '2000-09-31'));
-    entrenadores.push(new Entrenador(5,"Robert", "Lorenzo", "Crueldad", "Mexico", '1990-11-31'));
-    entrenadores.push(new Entrenador(6,"Maquiavelo", "El", "Principe", "Italia", '1998-01-31'));
-    entrenadores.push(new Entrenador(7,"Luigi", "Joseph", "Lantinos", "USA", '2000-02-31'));
-    return entrenadores;
+  createEntrenador(entrenador : Entrenador) : Observable<any>{
+    return this.http.post(api_olimpiadas + this.source + "/createEntrenador", entrenador);
+  }
+  getEntrenadores() : Observable<any>{
+    return this.http.get(api_olimpiadas + this.source + "/entrenador");
   }
 }

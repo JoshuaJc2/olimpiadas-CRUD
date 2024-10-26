@@ -1,4 +1,17 @@
+<style>
 
+  .my-pagination ::ng-deep{ 
+    .ngx-pagination{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .ngx-pagination .current{
+      background: #772953;
+    }
+  }
+  </style>
     <div class="body-content">
       <div class="card">
         <div class="card-header">
@@ -32,36 +45,37 @@
               </tr>
             </thead>
             <tbody>
-                     @for(arbitro of arbitros; track arbitro.idArbitro; let i = $index ) {
-                      <tr>
-                      <td>{{ arbitro.idArbitro }}</td>
-                      <td>{{ arbitro.nombre }}</td>
-                      <td>{{ arbitro.primer_apellido }}</td>
-                      <td>{{ arbitro.segundo_apellido}}</td>
-                      <td>{{ arbitro.pais_origen }}</td>
-                      <td>{{ arbitro.nacimiento }}</td>
-                      <td>
-                        <div class="dropdown">
-                          <!-- dots button  -->
-                          <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
-                          </button>
-      
-                          <!-- menu options -->
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item"> <!--(click)="updateCategory(category)">-->
-                              <i class="ph ph-note-pencil icon-text-ul"></i>Editar
-                            </a>
-                            <a class="dropdown-item enable-item"> <!--(click)="enableCategory(category.category_id)">-->
-                              <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                      </tr>
-                    }
+              <tr class="max-w-[500px] mx-auto" *ngFor="let arbitro of arbitros | paginate: {itemsPerPage: itemsPerPage, currentPage: p}">
+                <td>{{ arbitro.idArbitro }}</td>
+                <td>{{ arbitro.nombre }}</td>
+                <td>{{ arbitro.primer_apellido }}</td>
+                <td>{{ arbitro.segundo_apellido}}</td>
+                <td>{{ arbitro.pais_origen }}</td>
+                <td>{{ arbitro.nacimiento }}</td>
+                <td>
+                  <div class="dropdown">
+                    <!-- dots button  -->
+                    <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                    </button>
+
+                    <!-- menu options -->
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item"> <!--(click)="updateCategory(category)">-->
+                        <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                      </a>
+                      <a class="dropdown-item enable-item"> <!--(click)="enableCategory(category.category_id)">-->
+                        <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <!--}-->
             </tbody>
           </table>
+          <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+
         }
         </div>
 

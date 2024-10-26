@@ -27,8 +27,8 @@ export class SwalMessages{
             icon: 'error',
             toast: true,
             text: message,
-            //color: '#fff',
-            //background: '#EE4E4E',
+            color: '#fff',
+            background: '#EE4E4E',
             showConfirmButton: false,
             timer: 2000
         });
