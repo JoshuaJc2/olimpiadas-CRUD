@@ -1,0 +1,164 @@
+<style>
+
+  .my-pagination ::ng-deep{ 
+    .ngx-pagination{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  
+    .ngx-pagination .current{
+      background: #772953;
+    }
+  }
+  </style>
+    <div class="body-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="row">
+            <div class="col">
+              <h4 class="my-tittle">Arbitros</h4>
+            </div>
+            <div class="col">
+              <div class="botonDer">
+                <button type="button" class="btn btn-dark btn-new" (click)="showModalForm()">Nuevo Arbitro</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          @if(arbitros.length == 0){
+            <div class="text-center table-empty">
+                <h4>No cuentas con categorias registradas</h4>
+            </div>
+          }@else {
+          <table class="table table-striped">
+            <thead>
+              <tr class="table-dark">
+                <th scope="col">idarbitro</th>
+                <th scope="col">nombre</th>
+                <th scope="col">primer_apellido</th>
+                <th scope="col">segundo_apellido</th>
+                <th scope="col">pais_origen</th>
+                <th scope="col">nacimiento</th>
+                <th scope="col">otros</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="max-w-[500px] mx-auto" *ngFor="let arbitro of arbitros | paginate: {itemsPerPage: itemsPerPage, currentPage: p}">
+                <td>{{ arbitro.idArbitro }}</td>
+                <td>{{ arbitro.nombre }}</td>
+                <td>{{ arbitro.primer_apellido }}</td>
+                <td>{{ arbitro.segundo_apellido}}</td>
+                <td>{{ arbitro.pais_origen }}</td>
+                <td>{{ arbitro.nacimiento }}</td>
+                <td>
+                  <div class="dropdown">
+                    <!-- dots button  -->
+                    <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                      <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                    </button>
+
+                    <!-- menu options -->
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item"> <!--(click)="updateCategory(category)">-->
+                        <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                      </a>
+                      <a class="dropdown-item enable-item"> <!--(click)="enableCategory(category.category_id)">-->
+                        <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
+                      </a>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            <!--}-->
+            </tbody>
+          </table>
+          <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+
+        }
+        </div>
+
+        <div class="modal fade modal-lg" id="modalForm" tabindex="-1" role="dialog" data-bs-backdrop="static">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title">Arbitro</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+    
+                <div class="modal-body">
+
+                  <!-- Form para Arbitro -->
+                  <form [formGroup]="form" (ngSubmit)="onSubmit()"> <!--(ngSubmit)="onSubmit()"> <form>-->
+                    
+                    <div class="row">
+
+                      <div class="col-md-6">
+                        <div class="mb-3">
+                          <label for="nombre" class="form-label">Nombre<span class="color-red">*</span></label>
+                          <input type="text" class="form-control" formControlName="nombre" id="nombre"
+                            placeholder="Nombre del arbitro..." [ngClass]="{'is-invalid': form.controls['nombre'].errors && submitted}">
+                          @if (form.controls['nombre'].errors && submitted) {
+                            <small class="input-error-message">Favor de ingresar un nombre válido</small>
+                          }
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="mb3">
+                          <label for="primer_apellido" class="form-label">Primer Apellido<span class="color-red">*</span></label>
+                          <input type="text" class="form-control" formControlName="primer_apellido" id="primer_apellido"
+                            placeholder="Primer apellido..." [ngClass]="{'is-invalid': form.controls['primer_apellido'].errors && submitted}">
+                          @if (form.controls['primer_apellido'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar un apellido valido</small>
+                         }
+                        </div>
+                      </div>
+    
+                      <div class="col-md-6">
+                        <div class="mb3">
+                          <label for="segundo_apellido" class="form-label">Segundo Apellido<span class="color-red">*</span></label>
+                          <input type="text" class="form-control" formControlName="segundo_apellido" id="segundo_apellido"
+                            placeholder="Segundo apellido..." [ngClass]="{'is-invalid': form.controls['segundo_apellido'].errors && submitted}">
+                          @if (form.controls['segundo_apellido'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar un apellido valido</small>
+                         }
+                        </div>
+                      </div>
+    
+                      <div class="col-md-6">
+                        <div class="mb3">
+                          <label for="pais_origen" class="form-label">Pais de origen<span class="color-red">*</span></label>
+                          <input type="text" class="form-control" formControlName="pais_origen" id="pais_origen"
+                            placeholder="Pais de origen..." [ngClass]="{'is-invalid': form.controls['pais_origen'].errors && submitted}">
+                          @if (form.controls['pais_origen'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar un pais valido</small>
+                         }
+                        </div>
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="mb3">
+                          <label for="nacimiento" class="form-label">Fecha de nacimmiento<span class="color-red">*</span></label>
+                          <input type="date" class="form-control" formControlName="nacimiento" id="nacimiento"
+                            placeholder="Fecha de nacimiento.." [ngClass]="{'is-invalid': form.controls['nacimiento'].errors && submitted}">
+                          @if (form.controls['nacimiento'].errors && submitted) {
+                              <small class="input-error-message">Favor de ingresar una fecha valida</small>
+                         }
+                        </div>
+                      </div>
+                    
+                    <div class="form-button">
+                      <button type="submit" class="btn btn-dark btn-save">Agregar</button>
+                    </div>
+                  </div>
+                  </form>
+                
+                </div>
+    
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
