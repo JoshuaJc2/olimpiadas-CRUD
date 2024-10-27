@@ -62,10 +62,10 @@
                   </button>
                   <!-- menu options -->
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item"> <!--(click)="updateCategory(category)">-->
+                    <a class="dropdown-item" (click)="updateEntrenador(entrenador)">
                       <i class="ph ph-note-pencil icon-text-ul"></i>Editar
                     </a>
-                    <a class="dropdown-item enable-item"> <!--(click)="enableCategory(category.category_id)">-->
+                    <a class="dropdown-item enable-item" (click)="deleteEntrenador(entrenador.id)">
                       <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
                     </a>
                   </div>
@@ -107,10 +107,10 @@
 
                     <div class="col-md-6">
                       <div class="mb3">
-                        <label for="primer_apellido" class="form-label">Primer Apellido<span class="color-red">*</span></label>
-                        <input type="text" class="form-control" formControlName="primer_apellido" id="primer_apellido"
-                          placeholder="Primer apellido..." [ngClass]="{'is-invalid': form.controls['primer_apellido'].errors && submitted}">
-                        @if (form.controls['primer_apellido'].errors && submitted) {
+                        <label for="primerApellido" class="form-label">Primer Apellido<span class="color-red">*</span></label>
+                        <input type="text" class="form-control" formControlName="primerApellido" id="primerApellido"
+                          placeholder="Primer apellido..." [ngClass]="{'is-invalid': form.controls['primerApellido'].errors && submitted}">
+                        @if (form.controls['primerApellido'].errors && submitted) {
                             <small class="input-error-message">Favor de ingresar un apellido valido</small>
                        }
                       </div>
@@ -118,10 +118,10 @@
   
                     <div class="col-md-6">
                       <div class="mb3">
-                        <label for="segundo_apellido" class="form-label">Segundo Apellido</label>
-                        <input type="text" class="form-control" formControlName="segundo_apellido" id="segundo_apellido"
-                          placeholder="Segundo apellido..." [ngClass]="{'is-invalid': form.controls['segundo_apellido'].errors && submitted}">
-                        @if (form.controls['segundo_apellido'].errors && submitted) {
+                        <label for="segundoApellido" class="form-label">Segundo Apellido<span class="color-red">*</span></label>
+                        <input type="text" class="form-control" formControlName="segundoApellido" id="segundoApellido"
+                          placeholder="Segundo apellido..." [ngClass]="{'is-invalid': form.controls['segundoApellido'].errors && submitted}">
+                        @if (form.controls['segundoApellido'].errors && submitted) {
                             <small class="input-error-message">Favor de ingresar un apellido valido</small>
                        }
                       </div>
@@ -129,10 +129,10 @@
   
                     <div class="col-md-6">
                       <div class="mb3">
-                        <label for="pais_origen" class="form-label">Pais de origen<span class="color-red">*</span></label>
-                        <input type="text" class="form-control" formControlName="pais_origen" id="pais_origen"
-                          placeholder="Pais de origen..." [ngClass]="{'is-invalid': form.controls['pais_origen'].errors && submitted}">
-                        @if (form.controls['pais_origen'].errors && submitted) {
+                        <label for="paisOrigen" class="form-label">Pais de origen<span class="color-red">*</span></label>
+                        <input type="text" class="form-control" formControlName="paisOrigen" id="paisOrigen"
+                          placeholder="Pais de origen..." [ngClass]="{'is-invalid': form.controls['paisOrigen'].errors && submitted}">
+                        @if (form.controls['paisOrigen'].errors && submitted) {
                             <small class="input-error-message">Favor de ingresar un pais valido</small>
                        }
                       </div>

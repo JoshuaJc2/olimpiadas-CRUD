@@ -1,17 +1,17 @@
 export class Arbitro{
-    idArbitro : number = 0;
+    id : number = 0;
     nombre : String = "";
-    primer_apellido : String = "";
-    segundo_apellido : String = "";
-    pais_origen : String = "";
+    primerApellido : String = "";
+    segundoApellido : String = "";
+    paisOrigen : String = "";
     nacimiento : String = "";   
 
-    constructor(idArbitro : number, nombre : String, primer_apellido : String, segundo_apellido : String, pais_origen : String, nacimiento : String){
-        this.idArbitro = idArbitro;
+    constructor(id : number, nombre : String, primerApellido : String, segundoApellido : String, paisOrigen : String, nacimiento : String){
+        this.id = id;
         this.nombre = nombre;
-        this.primer_apellido = primer_apellido;
-        this.segundo_apellido = segundo_apellido;
-        this.pais_origen = pais_origen;
+        this.primerApellido = primerApellido;
+        this.segundoApellido = segundoApellido;
+        this.paisOrigen = paisOrigen;
         this.nacimiento = nacimiento; 
     }
 }

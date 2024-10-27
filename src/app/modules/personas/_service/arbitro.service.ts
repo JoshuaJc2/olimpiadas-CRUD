@@ -8,13 +8,29 @@ import { api_olimpiadas } from '../../../shared/api-olimpiadas';
   providedIn: 'root'
 })
 export class ArbitroService {
-  private source = '/olimpiadas';
+  private source = '/arbitro';
 
   constructor(
     private http : HttpClient
   ) { }
 
-  getArbitros() : Observable<any>{
-    return this.http.get(api_olimpiadas + this.source + "/arbitro");
+  createArbitro(arbitro : Arbitro) : Observable<any>{
+    return this.http.post(api_olimpiadas + this.source, arbitro);
   }
-}
+
+  getArbitro(id : number) : Observable<any>{
+    return this.http.get(api_olimpiadas + this.source + "/" + id);
+  } 
+
+  getArbitros() : Observable<any>{
+    return this.http.get(api_olimpiadas + this.source);
+  }
+
+  updateArbitro(id : number, arbitro : any) : Observable<any> {
+    return this.http.put(api_olimpiadas + this.source + "/" + id, arbitro);
+  }
+
+  deleteArbitro(id : number) : Observable<any> {
+    return this.http.delete(api_olimpiadas + this.source + "/" + id);
+  }
+ }

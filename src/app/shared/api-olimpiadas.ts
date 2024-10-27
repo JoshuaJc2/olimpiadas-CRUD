@@ -1,1 +1,1 @@
-export const api_olimpiadas: string = 'http://localhost:8080';
+export const api_olimpiadas: string = 'http://localhost:8080/olimpiadas';
