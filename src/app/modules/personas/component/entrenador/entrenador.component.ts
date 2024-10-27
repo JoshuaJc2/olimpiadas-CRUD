@@ -32,10 +32,30 @@ export class EntrenadorComponent {
   ){
     this.form = this.formBuilder.group({
       nombre: ["",[Validators.required]],
-      primer_apellido: ["", [Validators.required]],
-      segundo_apellido: [""],
-      pais_origen: ["", [Validators.required]],
+      primerApellido: ["", [Validators.required]],
+      segundoApellido: ["", [Validators.required]],
+      paisOrigen: ["", [Validators.required]],
       nacimiento: ["", [Validators.required]]
+    });
+  }
+
+  deleteEntrenador(id : number) {
+    this.swal.confirmMessage.fire({
+      title : "Favor de confirmar la eliminacion",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.entrenadorService.deleteEntrenador(id).subscribe({
+          next : (v) => {
+            console.log(v);
+            this.swal.successMessage("El entrenador ha sido eliminado");
+            this.getEntrenadores();
+          },
+          error : (e) =>{
+            console.log(e);
+            this.swal.errorMessage(e.error!.message);
+          }
+        });
+      }
     });
   }
 
@@ -74,17 +94,12 @@ export class EntrenadorComponent {
     this.submitted = true;
     if(this.form.invalid) return;
     this.submitted = false;
-    
-    this.onSubmitCreate();
-    /*
-    let id = this.entrenadores.length + 1;
-    let nuevaCat = new Entrenador(id, this.form.controls['nombre'].value!, this.form.controls['primer_apellido'].value!, 
-      this.form.controls['segundo_apellido'].value!, this.form.controls['pais_origen'].value!, this.form.controls['nacimiento'].value!);
-    this.entrenadores.push(nuevaCat);
-    this.hideModalForm();
-    //alert("La categoria ha sido registrada");
-    this.swal.successMessage("El entrenador ha sido registrado"); // show message*/
 
+    if(this.idEntrenador == 0){
+      this.onSubmitCreate();
+    } else {
+      this.onSubmitUpdate();
+    }
   }
 
   onSubmitCreate(){
@@ -100,6 +115,32 @@ export class EntrenadorComponent {
         this.swal.errorMessage(e.error.message);
       }
     });
+  }
+
+  onSubmitUpdate(){
+    this.entrenadorService.updateEntrenador(this.idEntrenador, this.form.value).subscribe({
+      next : (v) => {
+        this.getEntrenadores();
+        this.hideModalForm();
+        this.resetVariables();
+        this.swal.successMessage("El entrenador se ha actualizado");
+      },
+      error : (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error.message);
+      }
+    });
+  }
+
+  updateEntrenador(entrenador : Entrenador){
+    this.resetVariables();
+    this.showModalForm();
+    this.idEntrenador = entrenador.id;
+    this.form.controls['nombre'].setValue(entrenador.nombre);
+    this.form.controls['primerApellido'].setValue(entrenador.primerApellido);
+    this.form.controls['SegundoApellido'].setValue(entrenador.segundoApellido);
+    this.form.controls['paisOrigen'].setValue(entrenador.paisOrigen);
+    this.form.controls['nacimiento'].setValue(entrenador.nacimiento);
   }
 
   resetVariables(){

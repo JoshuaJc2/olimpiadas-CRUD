@@ -32,11 +32,31 @@ export class ArbitroComponent {
     private arbitroService : ArbitroService){
       this.form = this.formBuilder.group({
         nombre: ["",[Validators.required]],
-        primer_apellido: ["", Validators.required],
-        segundo_apellido: [""],
-        pais_origen: ["", [Validators.required]],
+        primerApellido: ["", [Validators.required]],
+        segundoApellido: ["", [Validators.required]],
+        paisOrigen: ["", [Validators.required]],
         nacimiento: ["", [Validators.required]]
       });
+  }
+
+  deleteArbitro(id : number) {
+    this.swal.confirmMessage.fire({
+      title : "Favor de confirmar la eliminacion",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.arbitroService.deleteArbitro(id).subscribe({
+          next : (v) => {
+            console.log(v);
+            this.swal.successMessage("El arbitro ha sido eliminado.");
+            this.getArbitros();
+          },
+          error : (e) =>{
+            console.log(e);
+            this.swal.errorMessage(e.error!.message);
+          }
+        });
+      }
+    });
   }
 
   getArbitros(){
@@ -73,14 +93,55 @@ export class ArbitroComponent {
     this.submitted = true;
     if(this.form.invalid) return;
     this.submitted = false;
-    let id = this.arbitros.length + 1;
-    let nuevaCat = new Arbitro(id, this.form.controls['nombre'].value!, this.form.controls['primer_apellido'].value!, 
-      this.form.controls['segundo_apellido'].value!, this.form.controls['pais_origen'].value!, this.form.controls['nacimiento'].value!);
-    this.arbitros.push(nuevaCat);
-    this.hideModalForm();
-    //alert("La categoria ha sido registrada");
-    this.swal.successMessage("El arbitro ha sido registrado"); // show message
+
+    if(this.idArbitro == 0){
+      this.onSubmitCreate();
+    } else {
+      this.onSubmitUpdate();
+    }
   }
+
+  onSubmitCreate(){
+    this.arbitroService.createArbitro(this.form.value).subscribe({
+      next : (v) => {
+        this.getArbitros();
+        this.hideModalForm();
+        this.resetVariables();
+        this.swal.successMessage("El arbitro ha sido creado");
+      },
+      error : (e) =>{
+        console.log(e);
+        this.swal.errorMessage(e.error.message);
+      }
+    });
+  }
+
+  onSubmitUpdate(){
+    this.arbitroService.updateArbitro(this.idArbitro, this.form.value).subscribe({
+      next : (v) => {
+        this.getArbitros();
+        this.hideModalForm();
+        this.resetVariables();
+        this.swal.successMessage("El arbitro se ha actualizado");
+      },
+      error : (e) => {
+        console.log(e);
+        this.swal.errorMessage(e.error.message);
+      }
+    });
+  }
+
+  updateArbitro(arbitro : Arbitro){
+    this.resetVariables();
+    this.showModalForm();
+    this.idArbitro = arbitro.id;
+    this.form.controls['nombre'].setValue(arbitro.nombre);
+    this.form.controls['primerApellido'].setValue(arbitro.primerApellido);
+    this.form.controls['SegundoApellido'].setValue(arbitro.segundoApellido);
+    this.form.controls['paisOrigen'].setValue(arbitro.paisOrigen);
+    this.form.controls['nacimiento'].setValue(arbitro.nacimiento);
+  }
+
 
   resetVariables(){
     this.form.reset();
