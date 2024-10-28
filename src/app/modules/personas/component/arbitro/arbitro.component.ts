@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SharedModule } from '../../../../shared/shares-module';
 import { SwalMessages } from '../../../../shared/swal-messages';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { Router } from '@angular/router';
 
 declare var $: any;
 
@@ -29,11 +30,12 @@ export class ArbitroComponent {
 
   constructor (
     private formBuilder : FormBuilder,
-    private arbitroService : ArbitroService){
+    private arbitroService : ArbitroService,
+    private router : Router){
       this.form = this.formBuilder.group({
         nombre: ["",[Validators.required]],
         primerApellido: ["", [Validators.required]],
-        segundoApellido: ["", [Validators.required]],
+        segundoApellido: [null],
         paisOrigen: ["", [Validators.required]],
         nacimiento: ["", [Validators.required]]
       });
@@ -137,15 +139,18 @@ export class ArbitroComponent {
     this.idArbitro = arbitro.id;
     this.form.controls['nombre'].setValue(arbitro.nombre);
     this.form.controls['primerApellido'].setValue(arbitro.primerApellido);
-    this.form.controls['SegundoApellido'].setValue(arbitro.segundoApellido);
+    this.form.controls['segundoApellido'].setValue(arbitro.segundoApellido);
     this.form.controls['paisOrigen'].setValue(arbitro.paisOrigen);
     this.form.controls['nacimiento'].setValue(arbitro.nacimiento);
   }
-
 
   resetVariables(){
     this.form.reset();
     this.submitted = false;
     this.idArbitro = 0;
+  }
+
+  verDetalles(id : number){
+    this.router.navigate(['detalles-arbitro', id]);
   }
 }

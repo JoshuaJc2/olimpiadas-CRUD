@@ -1,0 +1,39 @@
+<br>
+<div class="card border-dark mb-3" style="max-width: 80rem;">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h3>Detalles del entrenador</h3>
+            </div>
+            <div class="col">
+                <div class="back btn btn-outline-dark" (click)="redirect('entrenador')">
+                    <i class="fa-sharp-duotone fa-solid fa-arrow-left"></i> Regresar
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="">
+            <div>
+                <label><b>ID : </b> {{entrenador.id}}</label>
+            </div>
+            <div>
+                <label><b>Nombre : </b> {{entrenador.nombre}}</label>
+            </div>
+            <div>
+                <label><b>Primer Apellido : </b> {{entrenador.primerApellido}}</label>
+            </div>
+            @if(entrenador.segundoApellido != null){
+            <div>
+                <label><b>Segundo Apellido : </b> {{entrenador.segundoApellido}}</label>
+            </div>
+            }
+            <div>
+                <label><b>País : </b> {{entrenador.paisOrigen}}</label>
+            </div>
+            <div>
+                <label><b>Fecha de Nacimiento : </b> {{entrenador.nacimiento}}</label>
+            </div>
+        </div>
+    </div>
+</div>

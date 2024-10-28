@@ -1,0 +1,39 @@
+<br>
+<div class="card border-dark mb-3" style="max-width: 80rem;">
+    <div class="card-header">
+        <div class="row">
+            <div class="col">
+                <h3>Detalles del arbitro</h3>
+            </div>
+            <div class="col">
+                <div class="back btn btn-outline-dark" (click)="redirect('arbitro')">
+                    <i class="fa-sharp-duotone fa-solid fa-arrow-left"></i> Regresar
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="">
+            <div>
+                <label><b>ID : </b> {{arbitro.id}}</label>
+            </div>
+            <div>
+                <label><b>Nombre : </b> {{arbitro.nombre}}</label>
+            </div>
+            <div>
+                <label><b>Primer Apellido : </b> {{arbitro.primerApellido}}</label>
+            </div>
+            @if(arbitro.segundoApellido != null){
+            <div>
+                <label><b>Segundo Apellido : </b> {{arbitro.segundoApellido}}</label>
+            </div>
+            }
+            <div>
+                <label><b>País : </b> {{arbitro.paisOrigen}}</label>
+            </div>
+            <div>
+                <label><b>Fecha de Nacimiento : </b> {{arbitro.nacimiento}}</label>
+            </div>
+        </div>
+    </div>
+</div>

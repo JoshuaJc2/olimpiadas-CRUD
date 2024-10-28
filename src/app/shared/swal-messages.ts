@@ -42,7 +42,7 @@ export class SwalMessages{
         customClass: {
             title: 'swal-title',
             icon: 'swal-icon',
-            confirmButton: 'btn btn-primary swal-confirm-button',
+            confirmButton: 'btn btn-dark swal-confirm-button',
             cancelButton: 'btn btn-danger swal-cancel-button',
         },
     });

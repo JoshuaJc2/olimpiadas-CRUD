@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SwalMessages } from '../../../../shared/swal-messages';
 import { EntrenadorService } from '../../_service/entrenador.service';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { Router } from '@angular/router';
 
 declare var $:any;
 
@@ -28,12 +29,13 @@ export class EntrenadorComponent {
 
   constructor(
     private formBuilder : FormBuilder,
-    private entrenadorService : EntrenadorService
+    private entrenadorService : EntrenadorService,
+    private router : Router
   ){
     this.form = this.formBuilder.group({
       nombre: ["",[Validators.required]],
       primerApellido: ["", [Validators.required]],
-      segundoApellido: ["", [Validators.required]],
+      segundoApellido: [null],
       paisOrigen: ["", [Validators.required]],
       nacimiento: ["", [Validators.required]]
     });
@@ -138,7 +140,7 @@ export class EntrenadorComponent {
     this.idEntrenador = entrenador.id;
     this.form.controls['nombre'].setValue(entrenador.nombre);
     this.form.controls['primerApellido'].setValue(entrenador.primerApellido);
-    this.form.controls['SegundoApellido'].setValue(entrenador.segundoApellido);
+    this.form.controls['segundoApellido'].setValue(entrenador.segundoApellido);
     this.form.controls['paisOrigen'].setValue(entrenador.paisOrigen);
     this.form.controls['nacimiento'].setValue(entrenador.nacimiento);
   }
@@ -147,5 +149,9 @@ export class EntrenadorComponent {
     this.form.reset();
     this.submitted = false;
     this.idEntrenador = 0;
+  }
+
+  verDetalles(id : number){
+    this.router.navigate(['detalles-entrenador', id]);
   }
 }

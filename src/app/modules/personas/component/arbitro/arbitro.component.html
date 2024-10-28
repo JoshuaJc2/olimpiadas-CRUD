@@ -21,7 +21,9 @@
             </div>
             <div class="col">
               <div class="botonDer">
-                <button type="button" class="btn btn-dark btn-new" (click)="showModalForm()">Nuevo Arbitro</button>
+                <button type="button" class="btn btn-dark btn-new" (click)="showModalForm()">
+                  <i class="fa-sharp-duotone fa-solid fa-plus"></i> Nuevo Arbitro
+                </button>
               </div>
             </div>
           </div>
@@ -56,16 +58,19 @@
                   <div class="dropdown">
                     <!-- dots button  -->
                     <button class="dropdown-button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                      <i class="ph ph-dots-three-outline-vertical icon-menu"></i>
+                      <i class="fa-sharp-duotone fa-solid fa-ellipsis"></i>
                     </button>
 
                     <!-- menu options -->
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" (click)="verDetalles(arbitro.id)">
+                        Ver detalles
+                      </a>
                       <a class="dropdown-item" (click)="updateArbitro(arbitro)">
-                        <i class="ph ph-note-pencil icon-text-ul"></i>Editar
+                        <i class="fa-sharp-duotone fa-solid fa-pen-to-square"></i> Editar
                       </a>
                       <a class="dropdown-item enable-item" (click)="deleteArbitro(arbitro.id)">
-                        <i class="ph ph-check-circle icon-text-ul"></i>Eliminar
+                        <i class="fa-sharp-duotone fa-solid fa-trash"></i> Eliminar
                       </a>
                     </div>
                   </div>
@@ -118,7 +123,7 @@
     
                       <div class="col-md-6">
                         <div class="mb3">
-                          <label for="segundoApellido" class="form-label">Segundo Apellido<span class="color-red">*</span></label>
+                          <label for="segundoApellido" class="form-label">Segundo Apellido</label>
                           <input type="text" class="form-control" formControlName="segundoApellido" id="segundoApellido"
                             placeholder="Segundo apellido..." [ngClass]="{'is-invalid': form.controls['segundoApellido'].errors && submitted}">
                           @if (form.controls['segundoApellido'].errors && submitted) {

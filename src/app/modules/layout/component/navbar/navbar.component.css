@@ -45,22 +45,3 @@
     vertical-align: middle;
     margin-left: 16px;
 }
-
-.nav-link{ 
-    cursor: pointer;
-}
-
-.nav-register{
-    margin-left: 12px;
-}
-
-/* other  */
-
-.search-by-product{
-    width: 320px;
-}
-
-.i-search{
-    margin-left: -16px; 
-    margin-right: 16px;
-}

@@ -37,7 +37,7 @@
 }
 
 /*Buttons*/
-.btn-new{
+.btn-new, .btn-outline-dark{
   float:right;
 }
 
@@ -75,10 +75,8 @@
 
 /**/
 /* ul dropdown  */
-
-
 .dropdown-button{
-  /*border: none;*/
+  border: none;
   background-color: transparent;
 }
 
